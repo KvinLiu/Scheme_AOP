@@ -9,3 +9,10 @@
 (cons (cons 'one (cons 'two '())) (cons (cons 'three (cons 'four '())) '()))
 ;; e
 (cons (cons (cons 'one '()) '()) '())
+
+;; 1.7
+;; n + 1
+
+;; 1.8
+'(a 'b)
+;; quote list contains 'b
