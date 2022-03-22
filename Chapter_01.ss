@@ -10,9 +10,35 @@
 ;; e
 (cons (cons (cons 'one '()) '()) '())
 
-;; 1.7
+;; Exercise 1.7
 ;; n + 1
 
-;; 1.8
+;; Exercise 1.8
 '(a 'b)
 ;; quote list contains 'b
+
+;; Exercise 1.9
+;; If a and b evaluate to any values, what is
+
+;; a
+(car (cons a b))
+
+;; b
+(cdr (cons a b))
+
+;; Exercise 1.10
+;; a
+(symbol? (cons a b)) ;; ==> #f
+
+;; b
+(pair? (cons a b)) ;; ==> #t
+
+;; c
+(null? (cons a b)) ;; ==> #f
+
+;; d
+(null? (cdr (cons a '()))) ;; ==> #t
+
+;; Exercise 1.11
+;; If a list ls contains only one item, what is (null? (cdr ls))?
+;; #t
