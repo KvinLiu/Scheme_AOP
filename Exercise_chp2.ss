@@ -102,3 +102,24 @@
 (s-or-n-list? '(10 10 10 10)) ;; #t
 ;;; d
 (s-or-n-list? '()) ;; #f
+
+;; Exercise 2.10
+;; Rewrite the definitions of the three procedures last-item, member? and remove-1st
+;; with the cond expression replaced by if expressions.
+(define (last-item lst)
+  (if (null? (cdr lst))
+      (car lst)
+      (last-item (cdr lst))))
+
+(define (member? item lst)
+  (if (null? lst)
+      #f
+      (or (equal? item (car lst))
+          (member? item (cdr lst)))))
+
+(define (remove-1st item lst)
+  (if (null? lst)
+      '()
+      (if (equal? item (car lst))
+          (cdr lst)
+          (cons (car lst) (remove-1st item (cdr lst))))))
