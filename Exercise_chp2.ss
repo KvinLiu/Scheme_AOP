@@ -188,3 +188,62 @@
   (cond
    ((null? ls) '())
    (else (cons item (replace item (cdr ls))))))
+
+;; Exercise 2.17: remove-2nd
+;; Define a procedure remove-2nd that removes the second occurrence of a given item a form
+;; a list of item ls. You may use the procedure remove-1st in defining remove-2nd.
+;;(remove-2nd 'cat '(my cat loves cat food))
+(define (remove-2nd item ls)
+  (cond
+   ((null? ls) '())
+   ((equal? (car ls) item) (cons (car ls) (remove-1st item (cdr ls))))
+   (else (cons (car ls) (remove-2nd item (cdr ls))))))
+
+;; Exercise 2.18: remove-last
+;; Define a procedure remove-last that removes the last top-level occurrence of a given element
+;; item in a list ls.
+;; (remove-last 'a '(b a n a n a s)) ==> (b a n a n s)
+(define (remove-last item ls)
+  (cond
+   ((null? ls) '())
+   ((not (member? item (cdr ls))) (cdr ls))
+   (else (cons (car ls) (remove-last item (cdr ls))))))
+
+;; Exercise 2.19: sandwich-1st
+;; Define a procedure sandwich-1st that takes two items, a and b, and a list ls as its arguments.
+;; It replaces the first occurence of two successive b's in ls with b a b.
+;; (sandwich-1st 'meat 'bread '(bread chesse bread bread)) ==> (bread cheese bread meat bread)
+(define (sandwich-1st meat bread ls)
+  (cond
+   ((null? ls) '())
+   ((and (equal? bread (car ls))
+         (equal? bread (cadr ls))) (cons bread (cons meat (cdr ls))))
+   (else (cons (car ls) (sandwich-1st meat bread (cdr ls))))))
+
+;; Exercise 2.20: list-of-symbols?
+(define (list-of-symbols-cond? lst)
+  (cond
+   ((null? lst) #t)
+   ((symbol? (car lst)) (list-of-symbols-cond? (cdr lst)))
+   (else #f)))
+
+(define (list-of-symbols-if? lst)
+  (if (null? (cdr lst))
+      (symbol? (car lst))
+      (list-of-symbols-if (cdr lst))))
+
+(define (list-of-symbols-ano? lst)
+  (or (null? lst)
+      (and (symbol? (car lst))
+           (list-of-symbols-ano? (cdr lst)))))
+
+;; Exercise 2.21: all-same?
+;; Define a procedure all-same? that takes a list ls as its argument and tests
+;; whether all top-level elements of ls are the same.
+;; (all-same? '(a a a a a a a))
+(define (all-same? lst)
+  (cond
+   ((null? lst) #t)
+   ((null? (cdr lst)) #t)
+   (else (and (equal? (car lst) (cadr lst))
+              (all-same? (cdr lst))))))
