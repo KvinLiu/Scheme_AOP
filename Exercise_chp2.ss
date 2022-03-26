@@ -151,3 +151,40 @@
      ((null? ls) #f)
      ((equal? b (car ls)) (cons a (cdr ls)))
      (else (cons (car ls) (subst-1st a b (cdr ls)))))))
+
+;; Exercise 2.14: insert-right-1st
+;; The procedure insert-right-1st is like remove-1st except that instead of removing the item
+;; that it is searching for, it inserts a new item to its right.
+(define (insert-right-1st new old ls)
+  (cond
+   ((null? ls) '())
+   ((equal? old (car ls))
+    (cons old (cons new (cdr ls))))
+   (else (cons (car ls) (insert-right-1st new old (cdr ls))))))
+
+(define (insert-left-1st new old ls)
+  (cond
+   ((null? ls) '())
+   ((equal? old (car ls))
+    (cons new ls))
+   (else (cons (car ls) (insert-left-1st new old (cdr ls))))))
+
+;; Exercise 2.15: list-of-first-items
+;; Define a procedure list-of-first-items that takes as its argument a list composed of
+;; nonempty lists of items. Its value is a list composed of the first top-level item in
+;; each of the sublists. Test your procedure on:
+;; (list-of-first-items '((a) (b c d) (e f))) ==> (a b e)
+(define (list-of-first ls)
+  (cond
+   ((null? ls) '())
+   ((null? (car ls)) (list-of-first (cdr ls)))
+   (else (cons (caar ls) (list-of-first (cdr ls))))))
+
+;; Exercise 2.16: replace
+;; Define a procedure replace that replaces each top-level item in a list of items ls by
+;; a given item new-item. Test your procedure on:
+;; (replace 'no '(will you do me a favor))
+(define (replace item ls)
+  (cond
+   ((null? ls) '())
+   (else (cons item (replace item (cdr ls))))))
