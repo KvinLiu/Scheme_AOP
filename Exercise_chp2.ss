@@ -123,3 +123,31 @@
       (if (equal? item (car lst))
           (cdr lst)
           (cons (car lst) (remove-1st item (cdr lst))))))
+
+;; Exercise 2.11
+;; The definition of member? given in this section uses an or expression in the else
+;; clause. Rewrite the definition of member? so that each of the two subexpressions of
+;; the or expression is handled in a separate cond clause. Compare the resulting definition
+;; with the definition of remove-1st
+(define (member-c? a lat)
+  (cond
+   ((null? lat) #f)
+   ((eq? a (car lat)) #t)
+   (else (member-c? a (cdr lat)))))
+
+;; Exercise 2.12
+;; mystery, it takes a at least two items list and remove the last item of the list.
+(define mystery
+  (lambda (ls)
+    (if (null? (cddr ls))
+        (cons (car ls) '())
+        (cons (car ls) (mystery (cdr ls))))))
+;; new proper name remove-last
+
+;; Exercise 2.13: subst-1st
+(define subst-1st
+  (lambda (a b ls)
+    (cond
+     ((null? ls) #f)
+     ((equal? b (car ls)) (cons a (cdr ls)))
+     (else (cons (car ls) (subst-1st a b (cdr ls)))))))
