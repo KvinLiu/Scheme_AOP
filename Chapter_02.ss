@@ -52,3 +52,41 @@
    ((null? lst) '())
    ((eqv? item (car lst)) (cdr lst))
    (else (cons (car lst) (remv-1st item (cdr lst)))))
+
+;; Pre Program 2.5
+(define writeln
+  (lambda args
+    (for-each display args)
+    (newline)))
+
+;; Program 2.5 remove-1st-trace
+(define (remove-1st-trace item ls)
+  (cond
+   ((entering (null? ls) ls 1)
+    (leaving '() 1))
+   ((entering (equal? (car ls) item) ls 2)
+    (leaving (cdr ls) 2))
+   ((entering 'else ls 3)
+    (leaving
+     (cons (car ls) (remove-1st-trace item (cdr ls))) 3))))
+
+;; Program 2.6 entering
+(define entering
+  (lambda (test input cond-clause-number)
+    (begin
+      (if test
+          (writeln "    Entering cond-clause-"
+                       cond-clause-number
+                       " with ls = "
+                       input))
+      test)))
+
+;; Program 2.7 leaving
+(define leaving
+  (lambda (result cond-clause-number)
+    (begin
+      (writeln "Leaving cond-clause-"
+              cond-clause-number
+              " with result = "
+              result)
+      result)))
