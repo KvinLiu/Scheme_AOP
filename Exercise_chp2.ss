@@ -247,3 +247,27 @@
    ((null? (cdr lst)) #t)
    (else (and (equal? (car lst) (cadr lst))
               (all-same? (cdr lst))))))
+
+;; Exercise 2.22
+;; In the first trace, the second and third cond clauses were entered. In the
+;; second trace, the first and third cond clauses were entered. Can you give a
+;; /remove-1st-trace/ invocation that enters only the first and second cond
+;; clauses? Explain
+;;
+;;Explain
+;;First you need to find out what the fist and second clauses about.
+(define remove-1st-trace
+  (lambda (item ls)
+    (cond
+     ((entering (null? ls) ls 1)
+      (leaving '() 1))
+     ((entering (equal? (car ls) item) ls 2)
+      (leaving (cdr ls) 2))
+     ((entering 'else ls 3)
+      (leaving
+       (cons (car ls) (remove-1st-trace item (cdr ls))) 3)))))
+;; the defination of the procedure doesn't support the situation which only 1 and 2
+;; clause to be entered.
+;; clause 1 entered by '()
+;; clause 2 entered by '(item)
+;; so there have no situation qulified.
