@@ -90,3 +90,11 @@
               " with result = "
               result)
       result)))
+
+;; Program 2.8: swapper
+(define (swapper x y lst)
+  (cond
+   ((null? lst) '())
+   ((equal? x (car lst)) (cons y (swapper x y (cdr lst))))
+   ((equal? y (car lst)) (cons x (swapper x y (cdr lst))))
+   (else (cons (car lst) (swapper x y (cdr lst))))))
