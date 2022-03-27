@@ -361,3 +361,16 @@
               (leaving x 3))
              (else (car lst)))
             (swapper-trace x y (cdr lst)))))))
+
+;; Exercise 2.28
+(define tracing
+  (lambda (message result)
+    (begin
+      (writeln message result)
+      resut)))
+
+(define test-tracing
+  (lambda (test message input)
+    (begin
+      (if test (tracing message input))
+      test)))
