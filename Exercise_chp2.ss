@@ -271,3 +271,93 @@
 ;; clause 1 entered by '()
 ;; clause 2 entered by '(item)
 ;; so there have no situation qulified.
+
+;; Exercise 2.23
+;; Identify what is printed on the screen and what is returned in each of the
+;; following:
+
+;; a.
+;; w (* 3 4) = 12
+;; r #t
+
+;; b.
+;; w (cons 'a '(b c)) has the value (a b c)
+;; w (cons 'a '(b c)) has the value (a b c)
+;; w (cons 'a '(b c)) has the value (a b c)
+;; r (a b c)
+
+;; c.
+;; w Hello, how are you?
+;; w Fine, thank you. How are you? Jack
+;; w Just great! It is good to see you again, Jill
+;; r "Good-by. Have a nice day"
+
+;; Exercise 2.24: describe
+;; With describe defined as
+(define describe
+  (lambda (s)
+    (cond
+     ((null? s) '())
+     ((number? s) s)
+     ((symbol? s) (list 'quote s))
+     ((pair? s) (list 'cons (describe (car s)) (describe (cdr s))))
+     (else s))))
+;; a.
+;; 347
+;; b.
+;; 'hello
+;; c.
+;; (cons 1 (cons 2 (cons 'button (cons 'my (cons 'shoe ())))))
+;; d.
+;; (cons
+;;   'a
+;;   (cons
+;;     (cons
+;;       'b
+;;       (cons
+;;         'c
+;;         (cons (cons 'd (cons 'e ())) (cons 'f (cons 'g ())))))
+;;     (cons 'h ())))
+;; Describe explain each how each value are formed.
+
+;; Pre Program 2.5
+(define writeln
+  (lambda args
+    (for-each display args)
+    (newline)))
+
+;; Program 2.6 entering
+(define entering
+  (lambda (test input cond-clause-number)
+    (begin
+      (if test
+          (writeln "    Entering cond-clause-"
+                       cond-clause-number
+                       " with ls = "
+                       input))
+      test)))
+
+;; Program 2.7 leaving
+(define leaving
+  (lambda (result cond-clause-number)
+    (begin
+      (writeln "Leaving cond-clause-"
+              cond-clause-number
+              " with result = "
+              result)
+      result)))
+
+;; Exercise 2.25
+(define swapper-trace
+  (lambda (x y lst)
+    (cond
+     ((entering (null? lst) lst 1)
+      (leaving '() 1))
+     (else
+      (cons (cond
+             ((entering (equal? x (car lst)) (car lst) 2)
+              (leaving y 2))
+             ((entering (equal? y (car lst)) (car lst) 3)
+              (leaving x 3))
+             (else (car lst)))
+            (swapper-trace x y (cdr lst)))))))
