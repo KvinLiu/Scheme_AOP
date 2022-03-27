@@ -98,3 +98,15 @@
    ((equal? x (car lst)) (cons y (swapper x y (cdr lst))))
    ((equal? y (car lst)) (cons x (swapper x y (cdr lst))))
    (else (cons (car lst) (swapper x y (cdr lst))))))
+
+(define (swapper-n x y lst)
+  (cond
+   ((null? lst) '())
+   (else (cons (swap-tester x y (car lst))
+               (swapper-n x y (cdr lst))))))
+
+(define (swap-tester x y item)
+  (cond
+   ((equal? item x) y)
+   ((equal? item y) x)
+   (else item)))
