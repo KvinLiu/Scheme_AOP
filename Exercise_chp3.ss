@@ -63,3 +63,15 @@
 (define index
   (lambda (n lst)
     (index-helper n lst 0)))
+
+;; Exercise 3.6: make-list
+;; Define a procedure make-list that takes as arguments a nonnegative integer num
+;; and an item a and return a list of num elements, each of which is a. Test your
+;; procedure on:
+;; (make-list 5 'no) ==> (no no no no no)
+;; (length (make-list 7 'any)) ==> 7
+;; (all-same? (make-list 100 'any)) ==> #t
+(define (make-list n item)
+  (cond
+   ((zero? n) '())
+   (else (cons item (make-list (sub1 n) item)))))
