@@ -46,3 +46,20 @@
    ((null? lst) '())
    (else (cons (* n (car lst))
                (mult-by-n n (cdr lst))))))
+
+;; Exercise 3.5: index
+;; Define a procedure index that has two arguments, and item a and a list of
+;; items ls, and returns the index of a in ls, that is, the zero-based location
+;; of a in ls. If the item is not in the list, the procedure returns -1.
+;; (index 3 '(1 2 3 4 5 6)) ==>
+
+(define index-helper
+  (lambda (n lst proceed)
+    (cond
+     ((null? lst) -1)
+     ((equal? n (car lst)) proceed)
+     (else (index-helper n (cdr lst) (add1 proceed))))))
+
+(define index
+  (lambda (n lst)
+    (index-helper n lst 0)))
