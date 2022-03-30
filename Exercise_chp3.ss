@@ -98,3 +98,26 @@
    ((< (length lst) num) (error "Error: length of " lst "is less than " num))
    ((zero? num) '())
    (else (cons (car lst) (list-front (cdr lst) (sub1 num))))))
+
+;; Exercise 3.9: wrapa
+;; Define a procedure wrapa that takes as arguments an item a and a nonnegative
+;; integer num and wraps num sets of parentheses around the item a. Test your
+;; procedure on:
+;; (wrapa 'gift 1) => (gift)
+;; (wrapa 'sandwich 2) => ((sandwich))
+(define (wrapa item num)
+  (cond
+   ((zero? num) item)
+   (else (cons (wrapa item (sub1 num)) '()))))
+
+;; Exercise 3.10: multiple?
+;; Define a predicate multiple? that takes as arguments two integers m and n and
+;; retturns #t if m is an integer multiple of n. (Hint: Use remainder.) Test your
+;; procedure on:
+;;(multiple? 7 2) ==> #f
+;;(multiple? 9 3) ==> #t
+(define (multiple? m n)
+  (cond
+   ((and (zero? m) (zero? n)) #t)
+   ((and (not (zero? m)) (zero? n)) #f)
+   (else (zero? (remainder m n)))))
