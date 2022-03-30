@@ -31,6 +31,6 @@
 (define (list-ref ls n)
   (cond
    ((null? ls)
-    (error: "list-ref: Index " n "out of range for list" ls))
+    (error "list-ref: Index " n "out of range for list" ls))
    ((zero? n) (car ls))
    (else (list-ref (cdr ls) (sub1 n)))))

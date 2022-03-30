@@ -75,3 +75,26 @@
   (cond
    ((zero? n) '())
    (else (cons item (make-list (sub1 n) item)))))
+
+;; Exercise 3.7: count-background
+;; Define a procedure count-background that takes an item a and a list of items ls
+;; as arguments and returns the number of items in ls that are not equal? to a.
+;; Test your procedure on:
+;; (count-background 'blue '(red white blue yellow blue red)) ==> 4
+(define (count-background a lst)
+  (cond
+   ((null? lst) 0)
+   ((equal? a (car lst)) (count-background a (cdr lst)))
+   (else (add1 (count-background a (cdr lst))))))
+
+;; Exercise 3.8: list-front
+;; Define a procedure list-front that takes as arguments a list of items ls and a
+;; nonnegative integer num and returns the first num top-level items in ls. If num
+;; is larger than the number of top-level items in ls, an error is signaled. Test
+;; your procedure on:
+;; (list-front '(a b c d e f g) 4) => (a b c d)
+(define (list-front lst num)
+  (cond
+   ((< (length lst) num) (error "Error: length of " lst "is less than " num))
+   ((zero? num) '())
+   (else (cons (car lst) (list-front (cdr lst) (sub1 num))))))
