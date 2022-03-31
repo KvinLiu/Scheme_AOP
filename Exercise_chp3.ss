@@ -121,3 +121,22 @@
    ((and (zero? m) (zero? n)) #t)
    ((and (not (zero? m)) (zero? n)) #f)
    (else (zero? (remainder m n)))))
+
+;; Exercise 3.11: sum-of-odds
+;; It can be shown that the sum of the first n odd numbers is equal to n^2. For
+;; example,
+;; 1 + 3 + 5 + 7 = 16 = 4^2
+(define (helper n)
+  (cond
+   ((zero? n) '())
+   ((odd? (sub1 (* 2 n))) (cons (sub1 (* 2 n)) (helper (sub1 n))))
+   (else (helper (sub1 n)))))
+
+(define (sum-of-lst lst)
+  (cond
+   ((null? lst) 0)
+   (else (+ (car lst) (sum-of-lst (cdr lst))))))
+
+(define sum-of-odds
+  (lambda (n)
+    (sum-of-lst (helper n))))
