@@ -140,3 +140,14 @@
 (define sum-of-odds
   (lambda (n)
     (sum-of-lst (helper n))))
+
+;; Exercise 3.12 n-tuple->integer
+;; Define a procedure n-tuple->integer that converts a nonempty n-tuple of digits into
+;; the number having those digits. Test your program on the following:
+;; (n-tuple->integer '(3 1 4 6)) ==> 3146
+(define (n-tuple->integer tup)
+  (cond
+   ((null? tup) (error "bad argument " tup "to n-tuple->integer"))
+   ((null? (cdr tup)) (car tup))
+   (else (+ (* (car tup) (expt 10 (sub1 (length tup))))
+            (n-tuple->integer (cdr tup))))))
