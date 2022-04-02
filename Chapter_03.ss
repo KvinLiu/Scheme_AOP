@@ -34,3 +34,8 @@
     (error "list-ref: Index " n "out of range for list" ls))
    ((zero? n) (car ls))
    (else (list-ref (cdr ls) (sub1 n)))))
+
+;; Program 3.8: rzero?
+(define rzero?
+  (lambda (rtl)
+    (zero? (numr rtl))))
