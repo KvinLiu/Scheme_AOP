@@ -39,3 +39,11 @@
 (define rzero?
   (lambda (rtl)
     (zero? (numr rtl))))
+
+;; Program 3.9: r+
+(define r+
+  (lambda (x y)
+    (make-ratl
+     (+ (* (numr x) (denr y))
+        (* (numr y) (denr x)))
+     (* (denr x) (denr y)))))
