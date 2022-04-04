@@ -74,3 +74,31 @@
 (define (r= x y)
   (= (* (numr x) (denr y))
      (* (numr y) (denr x))))
+
+;; Program 3.15: rpositive?
+(define (rpositive? rtl)
+  (or (and (positive? (numr rtl)) (positive? (denr rtl)))
+      (and (negative? (numr rtl)) (negative? (denr rtl)))))
+
+;; Program 3.16: r>
+(define (r> x y)
+  (rpositive? (r- x y)))
+
+;; Program 3.17: max
+(define (max x y)
+  (if (x > y)
+      x
+      y))
+
+;; Program 3.18: rmax
+(define (rmax x y)
+  (if (r> x y)
+      x
+      y))
+
+;; Program 3.19: extreme-value
+(define extreme-value
+  (lambda (pred x y)
+    (if (pred x y)
+        x
+        y)))
