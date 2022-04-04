@@ -102,3 +102,19 @@
     (if (pred x y)
         x
         y)))
+
+;; Program 3.20: rprint
+(define (rprint rtl)
+  (writeln (numer rtl) "/" (denr rtl)))
+
+;; Program 3.21: numr, denr, make-ratl
+(define (numr rtl)
+  (car rtl))
+
+(define (denr rtl)
+  (cadr rtl))
+
+(define (make-ratl int1 int2)
+  (if (zero? int2)
+      (error "make-ratl: The denominator cannot be zero.")
+      '(int1 int2)))
