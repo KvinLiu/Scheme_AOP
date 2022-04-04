@@ -151,3 +151,16 @@
    ((null? (cdr tup)) (car tup))
    (else (+ (* (car tup) (expt 10 (sub1 (length tup))))
             (n-tuple->integer (cdr tup))))))
+
+;; Exercise 3.13
+;; If ls is a list of length 1000, how much "cdring" in ls is necessary in each of the
+;; three programs for list-ref presented in this section in order to find (list-ref ls 4)?
+;; Which of the three programs is most efficient?
+;; 4
+(define (list-ref ls n)
+  (cond
+   ((null? ls)
+    (error "list-ref: Index" n "out of range for list" ls))
+   ((zero? n) (car ls))
+   (else (list-ref (cdr ls) (sub1 n)))))
+;; tail-recursion optimise
