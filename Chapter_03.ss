@@ -112,9 +112,11 @@
   (car rtl))
 
 (define (denr rtl)
-  (cadr rtl))
+  ;; (cadr rtl))
+  (cdr rtl))
 
 (define (make-ratl int1 int2)
   (if (zero? int2)
       (error "make-ratl: The denominator cannot be zero.")
-      '(int1 int2)))
+      ;; (list int1 int2)))
+      (cons int1 int2)))

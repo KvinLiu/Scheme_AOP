@@ -164,3 +164,25 @@
    ((zero? n) (car ls))
    (else (list-ref (cdr ls) (sub1 n)))))
 ;; tail-recursion optimise
+
+;; Exercise 3.14: rminus
+(define (rminus rtl)
+  (r* (make-ratl -1 1) rtl))
+
+;; Exercise 3.15: same-sign?
+(define (same-sign? int1 int2)
+  (if (positive? (* int1 int2))
+      #t
+      #f))
+
+(define rpositive-test?
+  (lambda (rtl)
+    (same-sign? (numr rtl) (denr rtl))))
+
+;; Exercise 3.16: rabs
+;; Define a procedure rabs that takes a rational number and returns its absolute
+;; value
+(define (rabs rtl)
+  (if (rpositive? rtl)
+      rtl
+      (rminus rtl)))
