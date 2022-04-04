@@ -186,3 +186,15 @@
   (if (rpositive? rtl)
       rtl
       (rminus rtl)))
+
+;; Exercise 3.17: make-ratl
+;; Scheme has a procedure gcd that takes as arguments two integers and returns
+;; their greatest common divisor, that is, the largest positive integer, which
+;; divides into the two given integers.
+
+(define (make-ratl int1 int2)
+  (if (zero? int2)
+      (error "make-ratl: The denominator cannot be zero.")
+      ;; (list int1 int2)))
+      (cons (/ int1 (gcd int1 int2))
+            (/ int2 (gcd int1 int2)))))
