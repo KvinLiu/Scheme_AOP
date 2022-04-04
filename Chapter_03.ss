@@ -47,3 +47,30 @@
      (+ (* (numr x) (denr y))
         (* (numr y) (denr x)))
      (* (denr x) (denr y)))))
+
+;; Program 3.10: r*
+(define (r* x y)
+  (make-ratl
+   (* (numr x) (numr y))
+   (* (denr x) (denr y))))
+
+;; Program 3.11: r-
+(define (r- x y)
+  (make-ratl
+   (- (* (numr x) (denr y)) (* (numr y) (denr x)))
+   (* (denr x) (denr y))))
+
+;; Program 3.12: rinvert
+(define (rinvert rtl)
+  (if (rzero? rtl)
+      (error "rinvert: Cannot invert" rtl)
+      (make-ratl (denr rtl) (numr rtl))))
+
+;; Program 3.13: r/
+(define (r/ x y)
+  (r* x (rinvert y)))
+
+;; Program 3.14: r=
+(define (r= x y)
+  (= (* (numr x) (denr y))
+     (* (numr y) (denr x))))
