@@ -42,3 +42,25 @@
    ((null? lst) '())
    ((equal? item (car lst)) (remove-c item (cdr lst)))
    (else (cons (car lst) (remove-c item (cdr lst))))))
+
+;; Program: 4.7: count-all
+(define (count-all ls)
+  (cond
+   ((null? ls) 0)
+   ((not (pair? (car ls))) (add1 (count-all (cdr ls))))
+   (else (+ (count-all (car ls)) (count-all (cdr ls))))))
+
+(define (count-all-two ls)
+  (cond
+   ((null? ls) 0)
+   (else (+ (if (pair? (car ls))
+                (count-all-two (car ls))
+                1)
+            (count-all-two (cdr ls))))))
+
+(define (count-all-three ls)
+  (cond
+   ((null? ls) 0)
+   ((pair? (car ls))
+    (+ (count-all-three (car ls)) (count-all-three (cdr ls))))
+   (else (+ 1 (count-all-three (cdr ls))))))
