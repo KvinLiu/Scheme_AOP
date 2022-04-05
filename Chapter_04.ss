@@ -14,3 +14,24 @@
   (cond
    ((null? ls) temp)
    (else (reverse (cdr ls) (cons (car ls) temp)))))
+
+;; Program 4.3: merge
+(define (merge stpl1 stpl2)
+  (cond
+   ((null? stpl1) stpl2)
+   ((null? stpl2) stpl1)
+   ((< (car stpl1) (car stpl2))
+    (cons (car stpl1) (merge (cdr stpl1) stpl2)))
+   (else (cons (car stpl2) (merge stpl1 (cdr stpl2))))))
+
+;; Program 4.4: even?
+(define (even-custom? n)
+  (if (zero? n)
+      #t
+      (odd-custom? (sub1 n))))
+
+;; Program 4.5: odd?
+(define (odd-custom? n)
+  (if (zero? n)
+      #f
+      (even-custom? (sub1 n))))
