@@ -35,3 +35,10 @@
   (if (zero? n)
       #f
       (even-custom? (sub1 n))))
+
+;; Program 4.6: remove
+(define (remove-c item lst)
+  (cond
+   ((null? lst) '())
+   ((equal? item (car lst)) (remove-c item (cdr lst)))
+   (else (cons (car lst) (remove-c item (cdr lst))))))
