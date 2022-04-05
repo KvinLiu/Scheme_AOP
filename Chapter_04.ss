@@ -64,3 +64,12 @@
    ((pair? (car ls))
     (+ (count-all-three (car ls)) (count-all-three (cdr ls))))
    (else (+ 1 (count-all-three (cdr ls))))))
+
+;; Program 4.8: remove-all
+(define (remove-all item ls)
+  (cond
+   ((null? ls) '())
+   ((equal? item (car ls)) (remove-all item (cdr ls)))
+   ((pair? (car ls))
+    (cons (remove-all item (car ls)) (remove-all item (cdr ls))))
+   (else (cons (car ls) (remove-all item (cdr ls))))))
