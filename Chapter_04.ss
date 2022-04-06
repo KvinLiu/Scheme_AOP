@@ -73,3 +73,47 @@
    ((pair? (car ls))
     (cons (remove-all item (car ls)) (remove-all item (cdr ls))))
    (else (cons (car ls) (remove-all item (cdr ls))))))
+
+(define (remove-all-2 item ls)
+  (cond
+   ((null? ls) '())
+   ((equal? (car ls) item) (remove-all item (cdr ls)))
+   (else (cons (if (pair? (car ls))
+                   (remove-all-2 item (car ls))
+                   (car ls))
+               (remove-all-2 item (cdr ls))))))
+
+;; Program 4.9: remq-all
+(define (remq-all symbl ls)
+  (cond
+   ((null? ls) '())
+   ((eq? symbl (car ls)) (remq-all symbl (cdr ls)))
+   (else (cons (if (pair? (car ls))
+                   (remq-all symbl (car ls))
+                   (car ls))
+               (remq-all symbl (cdr ls))))))
+
+(define (remq-all-2 symbl ls)
+  (cond
+   ((null? ls) '())
+   ((pair? (car ls))
+    (cons (remq-all-2 symbl (car ls)) (remq-all-2 symbl (cdr ls))))
+   ((eq? symbl (car ls)) (remq-all-2 symbl (cdr ls)))
+   (else
+    (cons (car ls) (remq-all-2 symbl (cdr ls))))))
+
+;; Program 4.10: reverse-all
+(define (reverse-all ls)
+  (cond
+   ((null? ls) '())
+   ((pair? (car ls))
+    (append (reverse-all (cdr ls)) (list (reverse-all (car ls)))))
+   (else (append (reverse-all (cdr ls)) (list (car ls))))))
+
+(define (reverse-all-2 ls)
+  (if (null? ls)
+      '()
+      (append (reverse-all-2 (cdr ls))
+              (list (if (pair? (car ls))
+                        (reverse-all-2 (car ls))
+                        (car ls))))))
