@@ -49,8 +49,8 @@
 (define (subst-all new old ls)
   (cond
    ((null? ls) '())
-   ((pair? (car ls)) (cons (subst-all new old (car ls)) (subst-all new old (cdr ls))))
    ((equal? old (car ls)) (cons new (subst-all new old (cdr ls))))
+   ((pair? (car ls)) (cons (subst-all new old (car ls)) (subst-all new old (cdr ls))))
    (else (cons (car ls) (subst-all new old (cdr ls))))))
 
 (define (substq-all new old ls)
@@ -59,3 +59,26 @@
    ((pair? (car ls)) (cons (substq-all new old (car ls)) (substq-all new old (cdr ls))))
    ((eq? old (car ls)) (cons new (substq-all new old (cdr ls))))
    (else (cons (car ls) (substq-all new old (cdr ls))))))
+
+;; Exercise 4.6: insert-left-all
+;; Define a procedure insert-left-all with call structure (insert-left-all new old ls)
+;; that inserts the item new to the left of each occurrence of the item old in the ls.
+;; Test with:
+;; (insert-left-all 'z 'a '(a ((b a)))) ==> (z a ((b z a) ((z a (c)))))
+(define (insert-left-all new old ls)
+  (cond
+   ((null? ls) '())
+   ((pair? (car ls)) (cons (insert-left-all new old (car ls)) (insert-left-all new old (cdr ls))))
+   ((equal? old (car ls)) (append (list new old) (insert-left-all new old (cdr ls))))
+   (else (cons (car ls) (insert-left-all new old (cdr ls))))))
+
+;; Exercise 4.7: sum-all
+;; Define a procedure sum-all that finds the sum of the numbers in a list that may contain
+;; nested sublists of numbers.
+;; Test with:
+;; (sum-all '((1 3) (5 7) (9 11))) ==> 36
+(define (sum-all ls)
+  (cond
+   ((null? ls) 0)
+   ((pair? (car ls)) (+ (sum-all (car ls)) (sum-all (cdr ls))))
+   (else (+ (car ls) (sum-all (cdr ls))))))
