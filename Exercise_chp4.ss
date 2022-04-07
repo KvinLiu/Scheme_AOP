@@ -40,3 +40,22 @@
   (cond
    ((null? lst) '())
    (else (cons (list (car lst)) (deepen-1 (cdr lst))))))
+
+;; Exercise 4.5: subst-all, substq-all
+;; Define a procedure subst-all with call structure (subst-all new old ls) that replaces
+;; each occurrence of the item old in a list ls with the item new.
+;; Test with:
+;; (subst-all 'z 'a '(a (b (a c)) (a (d a)))) ==> (z (b (z c)) (z (d z)))
+(define (subst-all new old ls)
+  (cond
+   ((null? ls) '())
+   ((pair? (car ls)) (cons (subst-all new old (car ls)) (subst-all new old (cdr ls))))
+   ((equal? old (car ls)) (cons new (subst-all new old (cdr ls))))
+   (else (cons (car ls) (subst-all new old (cdr ls))))))
+
+(define (substq-all new old ls)
+  (cond
+   ((null? ls) '())
+   ((pair? (car ls)) (cons (substq-all new old (car ls)) (substq-all new old (cdr ls))))
+   ((eq? old (car ls)) (cons new (substq-all new old (cdr ls))))
+   (else (cons (car ls) (substq-all new old (cdr ls))))))
