@@ -117,3 +117,39 @@
               (list (if (pair? (car ls))
                         (reverse-all-2 (car ls))
                         (car ls))))))
+
+;; Program 4.13: depth
+(define (depth item)
+  (if (not (pair? item ))
+      0
+      (max (add1 (depth (car item))) (depth (cdr item)))))
+
+;; Program 4.14: flatten
+(define (flatten ls)
+  (cond
+   ((null? ls) '())
+   ((pair? (car ls)) (append (flatten (car ls)) (flatten (cdr ls))))
+   (else
+    (cons (car ls) (flatten (cdr ls))))))
+
+;; Program 4.15: remove-leftmost
+(define (remove-leftmost item ls)
+  (cond
+   ((null? ls) '())
+   ((equal? item (car ls)) (cdr ls))
+   ((not (pair? (car ls)))
+    (cons (car ls) (remove-leftmost item (cdr ls))))
+   ((member-all? item (car ls))
+    (cons (remove-leftmost item (car ls)) (cdr ls)))
+   (else (cons (car ls) (remove-leftmost item (cdr ls))))))
+
+;; Program 4.16: member-all?
+(define (member-all? item ls)
+  (if (null? ls)
+      #f
+      (or (equal? (car ls) item)
+          (and (not (pair? (car ls)))
+               (member-all? item (cdr ls)))
+          (and (pair (car ls))
+               (or (member-all? item (car ls))
+                   (member-all? item (cdr ls)))))))
