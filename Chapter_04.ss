@@ -153,3 +153,12 @@
           (and (pair (car ls))
                (or (member-all? item (car ls))
                    (member-all? item (cdr ls)))))))
+
+;; Program 4.17: remove-leftmost
+(define (remove-leftmost item ls)
+  (cond
+   ((null? ls) '())
+   ((equal? (car ls) item) (cdr ls))
+   ((and (pair? (car ls)) (member-all? item (car ls)))
+    (cons (remove-leftmost item (car ls)) (cdr ls)))
+   (else (cons (car ls) (remove-leftmost item (cdr ls))))))
