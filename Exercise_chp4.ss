@@ -108,3 +108,30 @@
    ((or (equal? (car ls) item)
         (null? (car ls))) (count-background-all item (cdr ls)))
    (else (add1 (count-background-all item (cdr ls))))))
+
+;; Exercise 4.10: leftmost
+;; Define a procedure leftmost that takes a nonempty list as its argument and returns the
+;; leftmost atomic item in the list. Test with:
+(define (leftmost ls)
+  (cond
+   ((pair? (car ls)) (leftmost (car ls)))
+   ((atom? (car ls)) (car ls))
+   (else (leftmost (cdr ls)))))
+
+;; Exercise 4.11: rightmost
+;; Define a procedure rightmost that takes a nonempty list as its argument and returns the
+;; rightmost atomic item in the list. Test with:
+(define (rightmost ls)
+  (if (null? (cdr ls))
+      (if (atom? (car ls))
+          (car ls)
+          (rightmost (car ls)))
+      (rightmost (cdr ls))))
+
+(define (rightmost2 ls)
+  (cond
+   ((null? (cdr ls))
+    (if (atom? (car ls))
+        (car ls)
+        (rightmost (car ls))))
+   (else (rightmost (cdr ls)))))
