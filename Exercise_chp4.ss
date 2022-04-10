@@ -82,3 +82,16 @@
    ((null? ls) 0)
    ((pair? (car ls)) (+ (sum-all (car ls)) (sum-all (cdr ls))))
    (else (+ (car ls) (sum-all (cdr ls))))))
+
+;; Exercise 4.8: count-parens-all
+;; Write the definition of a procedure count-parens-all that takes a list as its argument
+;; and counts the number of opening and closing parentheses in the list. Test with:
+;; (count-parens-all '()) ==> 2
+(define (count-parens-all ls)
+  (cond
+   ((null? ls) 2)
+   ((or (pair? (car ls))
+        (null? (car ls)))
+    (+ (count-parens-all (car ls)) (count-parens-all (cdr ls))))
+   (else
+    (+ 0 (count-parens-all (cdr ls))))))

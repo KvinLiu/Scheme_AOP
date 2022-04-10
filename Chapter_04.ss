@@ -150,7 +150,7 @@
       (or (equal? (car ls) item)
           (and (not (pair? (car ls)))
                (member-all? item (cdr ls)))
-          (and (pair (car ls))
+          (and (pair? (car ls))
                (or (member-all? item (car ls))
                    (member-all? item (cdr ls)))))))
 
