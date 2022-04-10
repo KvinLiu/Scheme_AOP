@@ -162,3 +162,9 @@
    ((and (pair? (car ls)) (member-all? item (car ls)))
     (cons (remove-leftmost item (car ls)) (cdr ls)))
    (else (cons (car ls) (remove-leftmost item (cdr ls))))))
+
+;; Program 4.18: fact
+(define (fact n)
+  (if (zero? n)
+      1
+      (* n (fact (sub1 n)))))
