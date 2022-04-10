@@ -95,3 +95,16 @@
     (+ (count-parens-all (car ls)) (count-parens-all (cdr ls))))
    (else
     (+ 0 (count-parens-all (cdr ls))))))
+
+;; Exercise 4.9: count-background-all
+;; Define a procedure count-background-all that takes as its arguments item and a list ls
+;; and return the number of items in ls that are not the same as item. Use the appropriate
+;; sameness predicate for the data shown in the examples. Test with
+;; (count-background-all 'a '((a) b (c a) d)) ==> 3
+(define (count-background-all item ls)
+  (cond
+   ((null? ls) 0)
+   ((pair? (car ls)) (+ (count-background-all item (car ls)) (count-background-all item (cdr ls))))
+   ((or (equal? (car ls) item)
+        (null? (car ls))) (count-background-all item (cdr ls)))
+   (else (add1 (count-background-all item (cdr ls))))))
