@@ -168,3 +168,9 @@
   (if (zero? n)
       1
       (* n (fact (sub1 n)))))
+
+;; Program 4.19: fact-it
+(define (fact-it n acc)
+  (if (zero? n)
+      acc
+      (fact-it (sub1 n) (* acc n))))
