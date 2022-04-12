@@ -135,3 +135,53 @@
         (car ls)
         (rightmost (car ls))))
    (else (rightmost (cdr ls)))))
+
+;; Exercise 4.12
+;; Enter the procedure fact into the computer and compute (fact n) for n = 10, 20, 30, 40,
+;; 50 and 100. You will have an opportunity to observe how the implementation of Scheme you
+;; are using displays large numbers.
+(define (fact n)
+  (if (zero? n)
+      1
+      (* n (fact (sub1 n)))))
+
+(define (fact-it n acc)
+  (if (zero? n) 
+      acc
+      (fact-it (sub1 n) (* n acc))))
+
+;; Exercise 4.13
+;; What happens when you invoke (fact 3.5)?
+;; cause there is no result can met perdiate zero? the fn freeze or runs forever.
+
+;; Exercise 4.14: harmonic-sum-it
+;; Define an iterative procedure harmonic-sum-it that sums the first n terms of the harmonic
+;; series
+
+;; Get help function from Program 3.8: rzero? 3.9: r+ 3.21
+(define (r+ x y)
+  (make-ratl 
+    (+ (* (numr x) (denr y)) (* (numr y) (denr x)))
+    (* (denr x) (denr y))))
+
+(define (numr rtl)
+  (car rtl))
+
+(define (denr rtl)
+  (cadr rtl))
+
+(define (rzero? rtl)
+  (zero? (numr rtl)))
+
+(define (make-ratl int1 int2)
+  (if (zero? int2)
+      (error "make-ratl: The denominator cannot be zero.")
+      (cons (/ int1 (gcd int1 int2))
+            (/ int2 (gcd int1 int2)))))
+
+(define (harmonic-sum-it n acc)
+  (if (zero? n)
+      acc
+      (harmonic-sum-it 
+        (sub1 n) 
+        (r+ (make-ratl 1 (sub1 n)) acc))))
