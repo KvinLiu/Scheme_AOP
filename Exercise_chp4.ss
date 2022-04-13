@@ -185,3 +185,32 @@
       (harmonic-sum-it 
         (sub1 n) 
         (r+ (make-ratl 1 (sub1 n)) acc))))
+
+;; Exercise 4.15
+;; Rewrite the recursive version of the procedure fib with the line
+;; (writeln "n = " n)
+;; inserted just below the line (lambda (n). Then compute (fib 4) and compare the results with
+;; the tree in. Also compute (fib 5) and (fib 6) observe how the number of recursive calls to
+;; fib increases.
+(define (fib n)
+  ((writeln "n = " n)
+   (if (zero? n)
+       1
+       (+ (fib (- n 1)) (fib (- n 2))))))
+
+;; Exercise 4.16
+;; Rewrite the iteractive version of the procedure fib-it with the line
+;; (writeln "n = " n ", acc1 = " acc1 ", acc2 = " acc2)
+;; inserted just below the line
+;; (lambda (n acc1 acc2))
+
+;; Exercise 4.17: calls-fib, adds-fib
+;; Write the definitions of the procedures calls-fib and adds-fib discussed in this section.
+
+;; Exercise 4.18: length-it
+;; Write an iterative version length-it of the procedure length that computes the length of
+;; a list.
+(define (length-it ls acc)
+  (if (null? ls)
+      acc
+      (length-it (cdr ls) (add1 acc))))
