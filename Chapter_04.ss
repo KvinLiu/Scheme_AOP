@@ -186,3 +186,9 @@
   (if (= n 1)
       acc2
       (fib-it (sub1 n) acc2 (+ acc1 acc2))))
+
+;; Program 4.25 reverse-it
+(define (reverse-it ls acc)
+  (if (null? ls)
+      acc
+      (reverse-it (cdr ls) (cons (car ls) acc))))
