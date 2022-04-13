@@ -180,3 +180,9 @@
   (if (< n 2)
       n
       (+ (fib (- n 1)) (fib (- n 2)))))
+
+;; Program 4.24 fib-it
+(define (fib-it n acc1 acc2)
+  (if (= n 1)
+      acc2
+      (fib-it (sub1 n) acc2 (+ acc1 acc2))))
