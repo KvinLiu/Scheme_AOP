@@ -214,3 +214,32 @@
   (if (null? ls)
       acc
       (length-it (cdr ls) (add1 acc))))
+
+;; Exercise 4.19: mk-asc-list-of-ints, mk-desc-list-of-ints
+;; Write an iterative procedure mk-asc-list-of-ints that, for any integer n, produces a list
+;; of the integers from 1 to n in ascending order. Then write an iterative procedure
+;; mk-desc-list-of-ints that, for any integer n, produces a list of integers from n to 1 in
+;; descending order.
+(define (mk-asc-list-of-ints n acc)
+  (if (= n 1)
+      (cons n acc)
+      (mk-asc-list-of-ints (sub1 n) (cons n acc))))
+
+;; Exercise 4.20: occurs, occurs-it
+;; Define both recursive and iterative versions of a procedure occurs that counts the number
+;; of times an item occurs at the top level in a list. Call the iterative version occurs-it.
+;; Test with:
+;; (a b a c a d)
+;; (b c a (b a) c a)
+;; (b (c d))
+(define (occurs item ls)
+  (cond
+   ((null? ls) 0)
+   ((equal? (car ls) item) (add1 (occurs item (cdr ls))))
+   (else (occurs item (cdr ls)))))
+
+(define (occurs-it item ls res)
+  (cond
+   ((null? ls) res)
+   ((equal? (car ls) item) (occurs-it item (cdr ls) (add1 res)))
+   (else (occurs-it item (cdr ls) res))))
