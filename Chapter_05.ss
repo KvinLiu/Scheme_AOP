@@ -10,3 +10,10 @@
                        (remove-leftmost item (cdr ls)))
                       (else (cdr ls))))))
    (else (cons (car ls) (remove-leftmost item (cdr ls))))))
+
+
+(letrec ((odd? (lambda (x)
+                 (and (not (zero? x)) (even? (sub1 x)))))
+       (even? (lambda (x)
+                  (or (zero? x) (odd? (sub1 x))))))
+  (odd? 17))
