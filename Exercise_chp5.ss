@@ -79,4 +79,28 @@
       (mystery-helper n '()))))
 ;; What is returned when (mystery 4) is invoked? Describe what is returned when
 ;; mystery is invoked with an arbitrary positive integer.
-(mystery 4)
+(mystery 4) ;; sort like print all 4 digits of binary.
+
+;; Exercise 5.6: insert-left-all
+;; Rewrite the definition of the procedure insert-left-all (See Exercise 4.6.)
+;; using a locally defined procedure that takes the list ls as its only argument.
+;;
+;; (define (insert-left-all new old ls)
+;;   (cond
+;;    ((null? ls) '())
+;;    ((pair? (car ls)) (cons (insert-left-all new old (car ls)) (insert-left-all new old (cdr ls))))
+;;    ((equal? old (car ls)) (append (list new old) (insert-left-all new old (cdr ls))))
+;;    (else (cons (car ls) (insert-left-all new old (cdr ls))))))
+;;
+;; (insert-left-all 'z 'a '(a ((b a)))) ==> (z a ((b z a)))
+(define (insert-left-all new old ls)
+  (letrec ((insert-local (lambda (ls*)
+                           (cond
+                            ((null? ls*) '())
+                            ((pair? (car ls*))
+                             (cons (insert-local (car ls*))
+                                   (insert-local (cdr ls*))))
+                            ((equal? old (car ls*))
+                             (append (list new old) (insert-local (cdr ls*))))
+                            (else (cons (car ls*) (insert-local (cdr ls*))))))))
+    (insert-local ls)))
