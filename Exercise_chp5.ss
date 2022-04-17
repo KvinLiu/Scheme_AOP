@@ -35,3 +35,16 @@
                  0
                  (+ (remainder n 10) (loop (quotient n 10)))))))
   (loop 1234)) ;; (+ 4 3 2 1 0) -> 10
+
+;; Exercise 5.3
+;; Write the two expression in Parts a and b of Exercise 5.1 as nested lambda expressions
+;; without using any let expressions.
+;; a
+((lambda (x)
+   ((lambda (x a) (max x a)) x 5)) 1)
+
+;; b
+(cons ((lambda (a) a) 1)
+      (cons ((lambda (x) x) 5)
+            (cons ((lambda (a b) (+ a b)) 1 2)
+                  '())))
