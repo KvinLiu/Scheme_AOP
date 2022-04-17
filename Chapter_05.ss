@@ -42,3 +42,20 @@
 ;; Program 5.8: leading-term
 (define (leading-term poly)
   (make-term (degree poly) (leading-coef poly)))
+
+;; Program 5.9: p+
+(define (p+ poly1 poly2)
+  (cond
+   ((zero-poly? poly1) poly2)
+   ((zero-poly? poly2) poly1)
+   (else (let ((n1 (degree poly1))
+               (n2 (degree poly2))
+               (a1 (leading-coef poly1))
+               (a2 (leading-coef poly2))
+               (rest1 (rest-of-poly poly1))
+               (rest2 (rest-of-poly poly2))))
+         (cond
+          ((> n1 n2) (poly-cons n1 a1 (p+ rest1 poly2)))
+          ((< n1 n2) (poly-cons n2 a2 (p+ poly1 rest2)))
+          (else
+           (poly-cons n1 (+ a1 a2) (p+ rest1 rest2)))))))
