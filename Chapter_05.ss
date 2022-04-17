@@ -29,3 +29,16 @@
                 ((equal? (car ls*) y) (cons x (swap (cdr ls*))))
                 (else (cons (car ls*) (swap (cdr ls*))))))))
     (swap ls)))
+
+;; Program 5.6: zero-poly?
+(define (zero-poly? poly)
+  (and (zero? (degree poly))
+       (zero? (leading-coef poly))))
+
+;; Program 5.7: make-term
+(define (make-term deg coef)
+  (poly-cons deg coef the-zero-poly))
+
+;; Program 5.8: leading-term
+(define (leading-term poly)
+  (make-term (degree poly) (leading-coef poly)))
