@@ -48,3 +48,17 @@
       (cons ((lambda (x) x) 5)
             (cons ((lambda (a b) (+ a b)) 1 2)
                   '())))
+
+;; Exercise 5.4
+;; Find the value of the following letrec expression.
+(letrec ((mystery
+          (lambda (tuple odds evens)
+            (if (null? tuple)
+                (append odds evens)
+                (let ((next-int (car tuple)))
+                  (if (odd? next-int)
+                      (mystery (cdr tuple)
+                               (cons next-int odds) evens)
+                      (mystery (cdr tuple)
+                               odds (cons next-int evens))))))))
+  (mystery '(3 16 4 7 9 12 24) '() '())) ;; '(9 7 3 24 12 4 16)
