@@ -62,3 +62,21 @@
                       (mystery (cdr tuple)
                                odds (cons next-int evens))))))))
   (mystery '(3 16 4 7 9 12 24) '() '())) ;; '(9 7 3 24 12 4 16)
+
+;; Exercise 5.5
+;; We define a procedure *mystery* as follows:
+(define mystery
+  (lambda (n)
+    (letrec
+        ((mystery-helper
+          (lambda (n s)
+            (cond
+             ((zero? n) (list s))
+             (else
+              (append
+               (mystery-helper (sub1 n) (cons 0 s))
+               (mystery-helper (sub1 n) (cons 1 s))))))))
+      (mystery-helper n '()))))
+;; What is returned when (mystery 4) is invoked? Describe what is returned when
+;; mystery is invoked with an arbitrary positive integer.
+(mystery 4)
