@@ -94,13 +94,33 @@
 ;;
 ;; (insert-left-all 'z 'a '(a ((b a)))) ==> (z a ((b z a)))
 (define (insert-left-all new old ls)
-  (letrec ((insert-local (lambda (ls*)
-                           (cond
-                            ((null? ls*) '())
-                            ((pair? (car ls*))
-                             (cons (insert-local (car ls*))
-                                   (insert-local (cdr ls*))))
-                            ((equal? old (car ls*))
-                             (append (list new old) (insert-local (cdr ls*))))
-                            (else (cons (car ls*) (insert-local (cdr ls*))))))))
+  (letrec ((insert-local
+            (lambda (ls*)
+              (cond
+               ((null? ls*) '())
+               ((pair? (car ls*))
+                (cons (insert-local (car ls*))
+                      (insert-local (cdr ls*))))
+               ((equal? old (car ls*))
+                (append (list new old) (insert-local (cdr ls*))))
+               (else (cons (car ls*) (insert-local (cdr ls*))))))))
     (insert-local ls)))
+
+;; Exercise 5.7: fib
+;; As in Program 5.4 for fact, write an iterative definition of fib using fib-it
+;; (See Program 4.24.) as a local procedure
+;;
+(define (fib n)
+  (letrec
+      ((fib-it
+        (lambda (n acc1 acc2)
+          (if (= n 1)
+              acc2
+              (fib-it (sub1 n) acc2 (+ acc1 acc2))))))
+    (fib-it n 0 1)))
+
+;; Exercise 5.8: list-ref
+;; Program 3.7 is a good definition of list-ref. Unfortunately, the information displayed
+;; upon encountering a reference out of range is not as complete as we might expect. In
+;; the definitions of list-ref, which precede it, however, adequate information is displayed.
+;; Rewrite Program 3.7, using a letrec expression, so that adequate information is displayed.
