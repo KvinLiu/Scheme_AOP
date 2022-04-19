@@ -59,3 +59,22 @@
           ((< n1 n2) (poly-cons n2 a2 (p+ poly1 rest2)))
           (else
            (poly-cons n1 (+ a1 a2) (p+ rest1 rest2)))))))
+
+;; Program 5.10: p*
+(define p*
+  (letrec
+    ((t* (lambda (trm poly)
+            (if (zero-poly? poly)
+                the-zero-poly
+                (poly-cons
+                  (+ (degree trm) (degree poly))
+                  (* (leading-coef trm) (leading-coef poly))
+                  (t* trm (rest-of-poly poly)))))))
+    (lambda (poly1 poly2)
+      (letrec
+        ((p*-helper (lambda (p1)
+                      (if (zero-poly? p1)
+                          the-zero-poly
+                          (p+ (t* (leading-term p1) poly2)
+                              (p*-helper (rest-of-poly p1)))))))
+        (p*-helper poly1)))))
