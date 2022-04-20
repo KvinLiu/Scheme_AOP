@@ -78,3 +78,12 @@
                           (p+ (t* (leading-term p1) poly2)
                               (p*-helper (rest-of-poly p1)))))))
         (p*-helper poly1)))))
+
+;; Program 5.11: negative-poly
+(define (negative-poly poly)
+  (let ((poly-negative-one (make-term 0 -1)))
+    (p* poly-negative-one poly)))
+
+;; Program 5.12: p-
+(define (p- poly1 poly2)
+  (p+ poly1 (negative-poly poly2)))
