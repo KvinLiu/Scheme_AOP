@@ -107,3 +107,31 @@
                                          (leading-coef rest))
                                       (rest-of-poly rest))))))))))
     (pvalue poly)))
+
+;; Program 5.14: The five basic definitions (Version I)
+(define the-zero-poly '(0))
+
+(define (degree poly)
+  (sub1 (length poly)))
+
+(define (leading-coef poly)
+  (car poly))
+
+(define (rest-of-poly poly)
+  (cond
+   ((zero? (degree poly)) the-zero-poly)
+   ((zero? (leading-coef (cdr poly)))
+    (rest-of-poly (cdr poly)))
+   (else (cdr poly))))
+
+(define (poly-cons (deg coef poly))
+  (let ((deg-p (degree poly)))
+    (cond
+     ((and (zero? deg) (equal? poly the-zero-poly)) (list coef))
+     ((>= deg-p deg)
+      (error "poly-cons: Degree too high in" poly))
+     ((zero? coef) poly)
+     (else
+      (cons coef
+            (append (list-of-zeros (sub1 (- deg deg-p)))
+                    poly))))))
