@@ -87,3 +87,23 @@
 ;; Program 5.12: p-
 (define (p- poly1 poly2)
   (p+ poly1 (negative-poly poly2)))
+
+;; Program 5.13: poly-value
+(define (poly-value poly num)
+  (letrec
+      ((pvalue (lambda (p)
+                 (let ((n (degree p)))
+                   (if (zero? n)
+                       (leading-coef p)
+                       (let ((rest (rest-of-poly p)))
+                         (if (< (degree rest) (sub1 n))
+                             (pvalue (poly-cons
+                                      (sub1 n)
+                                      (* num (leading-coef p))
+                                      rest))
+                             (pvalue (poly-cons
+                                      (sub1 n)
+                                      (+ (* num (leading-coef p))
+                                         (leading-coef rest))
+                                      (rest-of-poly rest))))))))))
+    (pvalue poly)))
