@@ -53,12 +53,12 @@
                (a1 (leading-coef poly1))
                (a2 (leading-coef poly2))
                (rest1 (rest-of-poly poly1))
-               (rest2 (rest-of-poly poly2))))
+               (rest2 (rest-of-poly poly2)))
          (cond
           ((> n1 n2) (poly-cons n1 a1 (p+ rest1 poly2)))
           ((< n1 n2) (poly-cons n2 a2 (p+ poly1 rest2)))
           (else
-           (poly-cons n1 (+ a1 a2) (p+ rest1 rest2)))))))
+           (poly-cons n1 (+ a1 a2) (p+ rest1 rest2))))))))
 
 ;; Program 5.10: p*
 (define p*
@@ -165,3 +165,20 @@
      ((zero? coef) poly)
      (else
       (cons (list deg coef) poly)))))
+
+;; Program 5.16: digits->poly
+(define (digits->poly digit-list)
+  (if (null? digit-list)
+      (error "digits->poly: Not defined for the empty list")
+      (letrec
+          ((make-poly
+            (lambda (deg ls)
+              (if (null? ls)
+                  the-zero-poly
+                  (poly-cons deg (car ls)
+                             (make-poly (sub1 deg) (cdr ls)))))))
+        (make-poly (sub1 (length digit-list)) digit-list))))
+
+;; Program 5.17: binary->decimal
+(define (binary->decimal digit-list)
+  (poly-value (digits->poly digit-list) 2))
