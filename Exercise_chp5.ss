@@ -194,3 +194,12 @@
          (poly-cons n1
                     (+ (a poly1) (a poly2))
                     (np+ (rest poly1) (rest poly2))))))))))
+
+;; Exercise 5.11: poly-quotient, poly-remainder
+;; Define a procedure poly-quotient that finds the quotient polynomial when poly1
+;; is divided by poly2 and a procedure poly-remainder that finds the remainder
+;; polynomial when poly1 is divided by poly2.
+(define (poly-quotient poly1 poly2)
+  (if (> (p- (poly1 poly2)) the-zero-poly)
+      poly2
+      (poly-quotient poly1 (p- poly2 poly1))))
