@@ -182,3 +182,17 @@
 ;; Program 5.17: binary->decimal
 (define (binary->decimal digit-list)
   (poly-value (digits->poly digit-list) 2))
+
+;; Program 5.18: poly->digits
+(define (poly->digits poly)
+  (letrec
+      ((convert
+        (lambda (p deg)
+          (cond
+           ((zero? deg) (list (leading-coef p)))
+           ((= (degree p) deg)
+            (cons (leading-coef p)
+                  (convert (rest-of-poly p) (sub1 deg))))
+           (else
+            (cons 0 (convert p (sub1 deg))))))))
+    (convert poly (degree poly))))
