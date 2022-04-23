@@ -140,3 +140,28 @@
       (cons coef
             (append (list-of-zeros (sub1 (- deg deg-p)))
                     poly))))))
+
+;; Program 5.15: The five basic definitions (Version II)
+(define the-zero-poly '((0 0)))
+
+(define (degree poly)
+  (caar poly))
+
+(define (leading-coef poly)
+  (cadar poly))
+
+(define (rest-of-poly poly)
+  (if (null? (cdr poly))
+      the-zero-poly
+      (cdr poly)))
+
+(define (poly-cons deg coef poly)
+  (let ((deg-p (degree poly)))
+    (cond
+     ((and (zero? deg) (equal? poly the-zero-poly))
+      (list (list 0 coef)))
+     ((>= deg-p deg)
+      (error "poly-cons: Degree too high in" poly))
+     ((zero? coef) poly)
+     (else
+      (cons (list deg coef) poly)))))
