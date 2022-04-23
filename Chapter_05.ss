@@ -124,12 +124,17 @@
     (rest-of-poly (cdr poly)))
    (else (cdr poly))))
 
-(define (poly-cons (deg coef poly))
+(define (list-of-zeros n)
+  (if (zero? n)
+      '()
+      (append '(0) (list-of-zeros (sub1 n)))))
+
+(define (poly-cons deg coef poly)
   (let ((deg-p (degree poly)))
     (cond
      ((and (zero? deg) (equal? poly the-zero-poly)) (list coef))
      ((>= deg-p deg)
-      (error "poly-cons: Degree too high in" poly))
+      (error "poly-cons: Degree too high in " poly))
      ((zero? coef) poly)
      (else
       (cons coef
