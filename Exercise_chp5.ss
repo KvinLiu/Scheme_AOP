@@ -169,3 +169,28 @@
         (p*-helper poly1)))))
 
 ;; Answer the two value is the same. different form have different selector.
+
+;; Exercise 5.10
+;; Look closely at the definition of p+ (see Program 5.9). When n1 is greater than
+;; n2, the variable a2 and rest2 are ignored. Similarly, when n1 is less than n2,
+;; the variables a1 and rest1 are ignored. Rewrite p+ so that this wasting of effort
+;; disappears. Hint: You will need to use let within the consequents of cond clauses.
+
+(define (np+ poly1 poly2)
+  (let ((a (lambda (poly)
+             (leading-coef poly)))
+        (rest (lambda (poly)
+                (rest-of-poly poly))))
+   (cond
+    ((zero-poly? poly1) poly2)
+    ((zero-poly? poly2) poly1)
+    (else
+     (let ((n1 (degree poly1))
+           (n2 (degree poly2)))
+       (cond
+        ((> n1 n2) (poly-cons n1 (a (poly1)) (np+ (rest poly1) poly2)))
+        ((< n1 n2) (poly-cons n2 (a (poly2)) (np+ poly1 (rest poly2))))
+        (else
+         (poly-cons n1
+                    (+ (a poly1) (a poly2))
+                    (np+ (rest poly1) (rest poly2))))))))))
