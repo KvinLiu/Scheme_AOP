@@ -124,3 +124,48 @@
 ;; upon encountering a reference out of range is not as complete as we might expect. In
 ;; the definitions of list-ref, which precede it, however, adequate information is displayed.
 ;; Rewrite Program 3.7, using a letrec expression, so that adequate information is displayed.
+
+;; Exercise 5.9
+;; Implement the algebra of polynomials in the two ways indicated in the text.
+;; For each implementation, test each of the procedures p+, p-, and p* with the
+;; polynomials
+;; P1(x) = 5x^4 - 7x^3 + 2x - 4
+;; P2(x) = x^3 + 6x^2 - 3x
+;; and using poly-value, find p1(-1), p1(2), p2(0), and p2(-2)
+(define (zero-poly? poly)
+  (and (zero? (degree poly)) (zero? (leading-coef poly))))
+
+(define (p+ poly1 poly2)
+  (cond
+   ((zero-poly? poly1) poly2)
+   ((zero-poly? poly2) poly1)
+   (else (let ((n1 (degree poly1))
+               (n2 (degree poly2))
+               (a1 (leading-coef poly1))
+               (a2 (leading-coef poly2))
+               (rest1 (rest-of-poly poly1))
+               (rest2 (rest-of-poly poly2)))
+           (cond
+            ((> n1 n2) (poly-cons n1 a1 (p+ rest1 poly2)))
+            ((< n1 n2) (poly-cons n2 a2 (p+ poly1 rest2)))
+            (else
+             (poly-cons n1 (+ a1 a2)) (p+ rest1 rest2)))))))
+(define p*
+  (letrec
+      ((t* (lambda (trm poly)
+             (if (zero-poly? poly)
+                 the-zero-poly
+                 (poly-cons
+                  (+ (degree trm) (degree poly))
+                  (* (leading-coef trm) (leading-coef poly))
+                  (t*  trm (rest-of-poly poly)))))))
+    (lambda (poly1 poly2)
+      (letrec
+          ((p*-helper (lambda (p1)
+                        (if (zero-poly? p1)
+                            the-zero-poly
+                            (p+ (t* (leading-term p1) poly2)
+                                (p*-helper (rest-of-poly p1)))))))
+        (p*-helper poly1)))))
+
+;; Answer the two value is the same. different form have different selector.
