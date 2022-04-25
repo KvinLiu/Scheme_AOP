@@ -196,3 +196,14 @@
            (else
             (cons 0 (convert p (sub1 deg))))))))
     (convert poly (degree poly))))
+
+;; Program 5.20: decimal->binary
+(define (decimal->binary num)
+  (letrec
+      ((dec->bin
+        (lambda (n deg)
+          (if (zero? n)
+              the-zero-poly
+              (p+ (make-term deg (remainder n 2))
+                  (dec->bin (quotient n 2) (add1 deg)))))))
+    (poly->digits (dec->bin num 0))))
