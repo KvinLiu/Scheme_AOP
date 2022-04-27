@@ -4,3 +4,14 @@
    (substring strng 0 n)
    insert
    (substring strng n (string-length strng))))
+
+;; Program 6.2 square-root
+(define (square-root a)
+  (letrec
+      ((next-estimate
+        (lambda (u)
+          (let ((v (/ (+ u (/ a u)) 2)))
+            (if (close-enough? u v)
+                v
+                (next-estimate v))))))
+    (next-estimate 1)))
