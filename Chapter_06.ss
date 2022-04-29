@@ -28,3 +28,9 @@
                       (newline)
                       (next-estimate v)))))))
     (next-estimate 1)))
+
+;; Program 6.5 round-n-place
+(define (round-n-places n dec-num)
+  (let ((scale-factor (expt 10 n)))
+    (/ (round (* dec-num scale-factor))
+       scale-factor)))
