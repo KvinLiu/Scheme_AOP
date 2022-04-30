@@ -203,3 +203,18 @@
   (if (> (p- (poly1 poly2)) the-zero-poly)
       poly2
       (poly-quotient poly1 (p- poly2 poly1))))
+
+;; Eeercise 5.16
+;; Convert each of the following decimal numbers to base 2.
+;; a. 53
+;; b. 404
+(define decimal->binary
+  (lambda (num)
+    (letrec
+        ((dec->bin
+          (lambda (n deg)
+            (if (zero? n)
+                the-zero-poly
+                (p+ (make-term deg (remainder n 2))
+                    (dec->bin (quotient n 2) (add1 deg)))))))
+      (poly->digits (dec->bin num 0)))))
