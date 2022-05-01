@@ -2,7 +2,7 @@
 (define (string-insert insrt strng n)
   (string-append
    (substring strng 0 n)
-   insert
+   insrt
    (substring strng n (string-length strng))))
 
 ;; Program 6.2 square-root
