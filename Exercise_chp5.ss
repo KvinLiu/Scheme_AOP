@@ -204,7 +204,7 @@
       poly2
       (poly-quotient poly1 (p- poly2 poly1))))
 
-;; Eeercise 5.16
+;; Exercise 5.16
 ;; Convert each of the following decimal numbers to base 2.
 ;; a. 53
 ;; b. 404
@@ -218,3 +218,16 @@
                 (p+ (make-term deg (remainder n 2))
                     (dec->bin (quotient n 2) (add1 deg)))))))
       (poly->digits (dec->bin num 0)))))
+
+;; Exercise 5.17
+;; Convert each of the following base 2 numbers to decimals.
+;; a. 10101010
+;; b. 1101011
+
+;; Exercise 5.18: octal->decimal, hexadecimal->decimal
+;; Look over the programs for binary->decimal and decimal->binary and
+;; see what changes have to be made to get definitions for the four
+;; procedures:
+
+;; Exercise 5.19: binary-sum, binary-product
+;; Exercise 5.20: binary->decimal, decimal->binary
