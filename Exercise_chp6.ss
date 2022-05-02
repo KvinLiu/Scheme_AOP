@@ -14,3 +14,22 @@
      ((string=? sstr (substring strng 0 sstrLen)) #t)
      (else
       (substring? sstr (substring strng 1 strngLen))))))
+
+;; Exercise 6.2: string-reverse
+;; Define a procedure string-reverse that takes a string as its argument and returns
+;; a string that is the given string with its characters in reverse order.
+;; Hint: You may find the following procedure useful
+(define substring-ref
+  (lambda (strng n)
+    (substring strng n (add1 n))))
+;; Test your procedure on the following:
+;; (string-reverse "Jack and Jill") => "lliJ dna kcaJ"
+;; (string-reverse "mom n dad") => "dad n mom"
+;; (string-reverse "") => ""
+(define (string-reverse strng)
+  (letrec ((strRhelp (lambda (str beg)
+                       (if (zero? (string-length str))
+                           beg
+                           (strRhelp (substring str 1 (string-length str))
+                                     (string-append beg (substring-ref str 0)))))))
+    (strRhelp strng "")))
