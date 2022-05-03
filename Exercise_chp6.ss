@@ -31,5 +31,15 @@
                        (if (zero? (string-length str))
                            beg
                            (strRhelp (substring str 1 (string-length str))
-                                     (string-append beg (substring-ref str 0)))))))
+                                     (string-append (substring-ref str 0) beg))))))
     (strRhelp strng "")))
+
+;; Exercise 6.3: palindrome?
+;; A string is a palindrome if the reverse of the string is the same as the string.
+;; For example, "mom" and "dad" are examples of palindromes. Define a predicate
+;; palindrome? that tests whether a given string is a palindrome. Test your predicate
+;; on the following:
+;; (palindrome? "able was I ere I saw elba") => #t
+;; (palindrome? "mom n dad") => #f
+(define (palindrome? strng)
+  (string=? strng (string-reverse strng)))
