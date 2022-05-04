@@ -43,3 +43,20 @@
 ;; (palindrome? "mom n dad") => #f
 (define (palindrome? strng)
   (string=? strng (string-reverse strng)))
+
+;; Exercise 6.4
+;; An example of the use of implicit begins in cond clauses is given below:
+(define (mystery pos-int)
+  (letrec ((helper (lambda (n count)
+                     (cond
+                      ((= n 1)
+                       (newline)
+                       (write (string-append "It took" (number->string count) " steps to get to 1.")))
+                      ((even? n)
+                       (write (string-append (number->string count) ". We divide " (number->string n) " by 2."))
+                       (helper (/ n 2) (add1 count)))
+                      (else
+                       (write (string-append (number->string count)
+                              ". We multiply " (number->string n) " by 3 and add 1."))
+                       (helper (+ (* n 3) 1) (add1 count)))))))
+    (helper pos-int 0)))
