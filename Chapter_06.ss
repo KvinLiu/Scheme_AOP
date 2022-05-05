@@ -34,3 +34,15 @@
   (let ((scale-factor (expt 10 n)))
     (/ (round (* dec-num scale-factor))
        scale-factor)))
+
+;; Program 6.6 read-demo
+(define (read-demo)
+  (display "Enter data (enter done when finished): ")
+  (let ((response (read)))
+    (cond
+     ((eq? response 'done) (display "Thank you. Good-bye."))
+     (else
+      (display "You entered: ")
+      (write response)
+      (newline)
+      (read-demo)))))
