@@ -46,3 +46,22 @@
       (write response)
       (newline)
       (read-demo)))))
+
+;; Program 6.7 interactive-square-root
+(define (interactive-square-root)
+  (begin
+    (write "Enter the number whose square root you want,")
+    (newline)
+    (write " or enter done to quit:")
+    (newline))
+  (let ((n (read)))
+    (if (eq? n 'done)
+        (begin
+          (write "That's all, folks.")
+          (newline))
+        (begin
+          (begin
+            (write "The square root of " n " is " (square-root n))
+            (newline))
+          (newline)
+          (interactive-square-root)))))
