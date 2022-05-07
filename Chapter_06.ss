@@ -65,3 +65,15 @@
             (newline))
           (newline)
           (interactive-square-root)))))
+
+;; Program 6.9 tower-of-hanoi
+(define (tower-of-hanoi n)
+  (letrec ((move (lambda (n source destination helper)
+                   (if (= n 1)
+                       (list (list source destination))
+                       (append
+                        (move (sub1 n) source helper destination)
+                        (cons
+                         (list source destination)
+                         (move (sub1 n) helper destination source)))))))
+    (move n 'L 'R 'C)))
