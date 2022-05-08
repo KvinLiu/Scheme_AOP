@@ -77,3 +77,24 @@
                          (list source destination)
                          (move (sub1 n) helper destination source)))))))
     (move n 'L 'R 'C)))
+
+;; Program 6.10 display-tower-of-hanoi
+(define display-tower-of-hanoi
+  (let ((show-move (lambda (s d)
+                     (display s)
+                     (display " --> ")
+                     (display d))))
+    (lambda (n)
+      (letrec
+          ((move
+            (lambda (n source destination helper)
+              (if (= n 1)
+                  (begin
+                    (show-move source destination)
+                    (newline))
+                  (begin
+                    (move (sub1 n) source helper destination)
+                    (show-move source destination)
+                    (display ", ")
+                    (move (sub1 n) helper destination source))))))
+        (move n 'L 'R 'C)))))
