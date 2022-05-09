@@ -98,3 +98,26 @@
                     (display ", ")
                     (move (sub1 n) helper destination source))))))
         (move n 'L 'R 'C)))))
+
+
+;; Program 6.12 legal?
+(define (legal? try legal-pl)
+  (letrec
+      ((good?
+        (lambda (new-pl up down)
+          (cond
+           ((null? new-pl) #t)
+           (else (let ((next-pos (car new-pl)))
+                   (and
+                    (not (= next-pos try))
+                    (not (= next-pos up))
+                    (not (= next-pos down))
+                    (good? (cdr new-pl)
+                           (add1 up)
+                           (sub1 down)))))))))
+    (good? legal-pl (add1 try) (sub1 try))))
+
+(define (solution? legal-pl)
+  (= (length (legal-pl) 8)))
+
+(define fresh-try 8)
