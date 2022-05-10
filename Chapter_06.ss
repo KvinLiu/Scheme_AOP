@@ -121,3 +121,10 @@
   (= (length (legal-pl) 8)))
 
 (define fresh-try 8)
+
+;; Program 6.13 build-solution
+(define (build-solution legal-pl)
+  (cond
+   ((solution? legal-pl) legal-pl)
+   (else
+    (forward fresh-try legal-pl))))
