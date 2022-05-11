@@ -128,3 +128,10 @@
    ((solution? legal-pl) legal-pl)
    (else
     (forward fresh-try legal-pl))))
+
+;; Program 6.14 forward
+(define (forward try legal-pl)
+  (cond
+   ((zero? try) (backtrack legal-pl))
+   ((legal? try legal-pl) (build-solution (cons try legal-pl)))
+   (else (forward (sub1 try) legal-pl))))
