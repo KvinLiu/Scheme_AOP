@@ -135,3 +135,9 @@
    ((zero? try) (backtrack legal-pl))
    ((legal? try legal-pl) (build-solution (cons try legal-pl)))
    (else (forward (sub1 try) legal-pl))))
+
+;; Program 6.15 backtrack
+(define (backtrack legal-pl)
+  (cond
+   ((null? legal-pl) '())
+   (else (forward (sub1 (car legal-pl)) (cdr legal-pl)))))
