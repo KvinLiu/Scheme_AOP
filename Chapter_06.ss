@@ -141,3 +141,34 @@
   (cond
    ((null? legal-pl) '())
    (else (forward (sub1 (car legal-pl)) (cdr legal-pl)))))
+
+;; Program 6.16 search
+(define (searcher legal? solution? fresh-try)
+  (letrec
+      ((build-solution
+        (lambda (legal-pl)
+          (cond
+           ((solution? legal-pl) legal-pl)
+           (else (forward fresh-try legal-pl)))))
+       (forward
+        (lambda (try legal-pl)
+          (cond
+           ((zero? try) (backtrack legal-pl))
+           ((legal? try legal-pl)
+            (build-solution (cons try legal-pl)))
+           (else (forward (sub1 try) legal-pl)))))
+       (backtrack
+        (lambda (legal-pl)
+          (cond
+           ((null? legal-pl) '())
+           (else
+            (forward (sub1 (car legal-pl)) (cdr legal-pl))))))
+       (build-all-solutions
+        (lambda ()
+          (letrec
+              ((loop (lambda (sol)
+                       (cond
+                        ((null? sol) '())
+                        (else (cons sol (loop (backtrack sol))))))))
+            (loop (build-solution '())))))
+       (build-all-solutions))))
