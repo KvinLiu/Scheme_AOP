@@ -10,3 +10,13 @@
       (begin
         (proc (car ls))
         (for-each proc (cdr ls)))))
+
+;; Program 7.3 add
+(define add
+  (letrec ((list-add
+            (lambda (ls)
+              (if (null? ls)
+                  0
+                  (+ (car ls) (list-add (cdr ls)))))))
+    (lambda args
+      (list-add args))))
