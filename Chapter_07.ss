@@ -23,3 +23,8 @@
 
 ;; Program 7.4 list
 (define list (lambda args args))
+
+;; Program 7.5 writln
+(define (writeln args)
+  (for-each display args)
+  (newline))
