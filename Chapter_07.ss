@@ -20,3 +20,6 @@
                   (+ (car ls) (list-add (cdr ls)))))))
     (lambda args
       (list-add args))))
+
+;; Program 7.4 list
+(define list (lambda args args))
