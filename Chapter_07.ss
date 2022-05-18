@@ -28,3 +28,14 @@
 (define (writeln args)
   (for-each display args)
   (newline))
+
+;; Program 7.6 error
+(define (error args)
+  (display "Error: ")
+  (for-each
+   (lambda (value)
+     (display " ")
+     (display value))
+   args)
+  (newline)
+  (reset))
