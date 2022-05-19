@@ -39,3 +39,9 @@
    args)
   (newline)
   (reset))
+
+;; Program 7.7 add
+(define (add args)
+  (if (null? args)
+      0
+      (+ (car args) (apply add (cdr args)))))
