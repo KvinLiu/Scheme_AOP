@@ -50,3 +50,9 @@
 (define (compose f g)
   (lambda (x)
     (f (g x))))
+
+;; Program 7.9 plus
+(define (plus x y)
+  (if (zero? y)
+      x
+      (add1 (plus x (sub1 y)))))
