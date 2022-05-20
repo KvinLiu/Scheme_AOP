@@ -45,3 +45,8 @@
   (if (null? args)
       0
       (+ (car args) (apply add (cdr args)))))
+
+;; Program 7.8 compose
+(define (compose f g)
+  (lambda (x)
+    (f (g x))))
