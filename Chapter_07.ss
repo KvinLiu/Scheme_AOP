@@ -56,3 +56,9 @@
   (if (zero? y)
       x
       (add1 (plus x (sub1 y)))))
+
+;; Program 7.10 times
+(define (times x y)
+  (if (zero? y)
+      0
+      (plus x (times x (sub1 y)))))
