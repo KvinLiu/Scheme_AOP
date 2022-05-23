@@ -68,3 +68,9 @@
   (if (zero? y)
       1
       (times x (exponent x (sub1 y)))))
+
+;; Program 7.12 super
+(define (super x y)
+  (if (zero? y)
+      1
+      (exponent x (super x (sub1 y)))))
