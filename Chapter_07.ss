@@ -74,3 +74,9 @@
   (if (zero? y)
       1
       (exponent x (super x (sub1 y)))))
+
+;; Program 7.13 superduper
+(define (superduper x y)
+  (if (zero? y)
+      1
+      (super x (superduper x (sub1 y)))))
