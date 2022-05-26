@@ -80,3 +80,15 @@
   (if (zero? y)
       1
       (super x (superduper x (sub1 y)))))
+
+;; Program 7.14 super-order
+(define (super-order n)
+  (cond
+   ((= n 1) plus)
+   ((= n 2) times)
+   (else (lambda (x y)
+           (cond
+            ((zero? y) 1)
+            (else ((super-order (sub1 n))
+                   x
+                   ((super-order n) x (sub1 y)))))))))
