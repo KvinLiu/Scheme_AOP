@@ -92,3 +92,7 @@
             (else ((super-order (sub1 n))
                    x
                    ((super-order n) x (sub1 y)))))))))
+
+;; Program 7.15 ackermann
+(define (ackermann n)
+  ((super-order n) n n))
