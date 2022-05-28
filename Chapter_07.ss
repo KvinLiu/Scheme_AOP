@@ -96,3 +96,13 @@
 ;; Program 7.15 ackermann
 (define (ackermann n)
   ((super-order n) n n))
+
+;; Program 7.16 member?-c
+(define (member?-c item)
+  (letrec
+      ((helper (lambda (ls)
+                 (if (null? ls)
+                     #f
+                     (or (equal? (car ls) item)
+                         (helper (cdr ls)))))))
+    helper))
