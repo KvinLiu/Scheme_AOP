@@ -106,3 +106,13 @@
                      (or (equal? (car ls) item)
                          (helper (cdr ls)))))))
     helper))
+
+;; Program 7.17 apply-to-all
+(define (apply-to-all proc)
+  (letrec
+      ((helper
+        (lambda (ls)
+          (if (null? ls)
+              '()
+              (cons (proc (car ls)) (helper (cdr ls)))))))
+    helper))
