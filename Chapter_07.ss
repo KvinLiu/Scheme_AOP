@@ -116,3 +116,13 @@
               '()
               (cons (proc (car ls)) (helper (cdr ls)))))))
     helper))
+
+;; Program 7.18 sum
+(define sum
+  (letrec
+      ((helper
+        (lambda (ls)
+          (if (null? ls)
+              0
+              (+ (car ls) (helper (cdr ls)))))))
+    helper))
