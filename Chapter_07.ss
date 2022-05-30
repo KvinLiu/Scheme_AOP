@@ -126,3 +126,13 @@
               0
               (+ (car ls) (helper (cdr ls)))))))
     helper))
+
+;; Program 7.19 product
+(define product
+  (letrec
+      ((helper
+        (lambda (ls)
+          (if (null? ls)
+              1
+              (* (car ls) (helper (cdr ls)))))))
+    helper))
