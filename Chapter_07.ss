@@ -136,3 +136,15 @@
               1
               (* (car ls) (helper (cdr ls)))))))
     helper))
+
+;; Program 7.20 swapper-m
+(define (swapper-m x y)
+  (letrec
+      ((helper
+        (lambda (ls)
+          (cond
+           ((null? ls) '())
+           ((equal? (car ls) x) (cons y (helper (cdr ls))))
+           ((equal? (car ls) y) (cons x (helper (cdr ls))))
+           (else (cons (car ls) (helper (cdr ls))))))))
+    helper))
