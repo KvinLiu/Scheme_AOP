@@ -148,3 +148,13 @@
            ((equal? (car ls) y) (cons x (helper (cdr ls))))
            (else (cons (car ls) (helper (cdr ls))))))))
     helper))
+
+;; Program flat-recur
+(define (flat-recur seed list-proc)
+  (letrec
+      ((helper
+        (lambda (ls)
+          (if (null? ls)
+              seed
+              (list-proc (car ls) (helper (cdr ls)))))))
+    helper))
