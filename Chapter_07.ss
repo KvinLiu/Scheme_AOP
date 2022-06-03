@@ -149,7 +149,7 @@
            (else (cons (car ls) (helper (cdr ls))))))))
     helper))
 
-;; Program flat-recur
+;; Program 7.23 flat-recur
 (define (flat-recur seed list-proc)
   (letrec
       ((helper
@@ -158,3 +158,12 @@
               seed
               (list-proc (car ls) (helper (cdr ls)))))))
     helper))
+
+;; Program 7.24 filter-in-c
+(define (filter-in-c pred)
+  (flat-recur
+   '()
+   (lambda (x y)
+     (if (pred x)
+         (cons x y)
+         y))))
