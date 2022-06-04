@@ -167,3 +167,18 @@
      (if (pred x)
          (cons x y)
          y))))
+
+;; Program 7.25 filter-in-all-c
+(define (filter-in-all-c pred)
+  (letrec
+      ((helper
+        (lambda (ls)
+          (if (null? ls)
+              '()
+              (let ((a (car ls)))
+                (if (or (pair? a) (null? a))
+                    (cons (helper a) (helper (cdr ls)))
+                    (if (pred a)
+                        (cons a (helper (cdr ls)))
+                        (helper (cdr ls)))))))))
+    helper))
