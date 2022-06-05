@@ -182,3 +182,7 @@
                         (cons a (helper (cdr ls)))
                         (helper (cdr ls)))))))))
     helper))
+
+;; Program 7.26 filter-in-all
+(define (filter-in-all pred ls)
+  ((filter-in-all-c pred) ls))
