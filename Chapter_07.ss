@@ -198,3 +198,16 @@
                         (+ (helper a) (helper (cdr ls)))
                         (+ a (helper (cdr ls)))))))))
     helper))
+
+;; Program 7.28 deep-recur
+(define (deep-recur seed item-proc list-proc)
+  (letrec
+      ((helper
+        (lambda (ls)
+          (if (null? ls)
+              seed
+              (let ((a (car ls)))
+                (if (or (pair? a) (null? a))
+                    (list-proc (helper a) (helper (cdr ls)))
+                    (item-proc a (helper (cdr ls)))))))))
+    helper))
