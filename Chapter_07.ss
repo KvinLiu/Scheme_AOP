@@ -186,3 +186,15 @@
 ;; Program 7.26 filter-in-all
 (define (filter-in-all pred ls)
   ((filter-in-all-c pred) ls))
+
+;; Program 7.27 sum-all
+(define sum-all
+  (letrec ((helper
+            (lambda (ls)
+              (if (null? ls)
+                  0
+                  (let ((a (car ls)))
+                    (if (or (pair? a) (null? a))
+                        (+ (helper a) (helper (cdr ls)))
+                        (+ a (helper (cdr ls)))))))))
+    helper))
