@@ -11,3 +11,15 @@
 (define (at-least-one pred)
   (lambda (arg1 arg2)
     (or (pred arg1) (pred arg2))))
+
+;; Program 8.4 make-set
+(define (make-set args)
+  (letrec
+      ((list-make-set
+        (lambda (args-list)
+          (if (null? args-list)
+              the-empty-set
+              (adjoin
+               (car args-list)
+               (list-make-set (cdr args-list)))))))
+    (list-make-set args)))
