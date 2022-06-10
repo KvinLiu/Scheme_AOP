@@ -6,3 +6,8 @@
 (define (neither pred)
   (lambda (arg1 arg2)
     (not (or (pred arg1) (pred arg2)))))
+
+;; Program 8.3 at-least-one
+(define (at-least-one pred)
+  (lambda (arg1 arg2)
+    (or (pred arg1) (pred arg2))))
