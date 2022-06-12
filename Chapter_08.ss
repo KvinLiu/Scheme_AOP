@@ -23,3 +23,14 @@
                (car args-list)
                (list-make-set (cdr args-list)))))))
     (list-make-set args)))
+
+;; Program 8.5 none
+(define (none pred)
+  (letrec
+      ((test
+        (lambda (s)
+          (or (empty-set? s)
+              (let ((elem (pick s)))
+                (and (not (pred elem))
+                     (test ((residue elem) s))))))))
+    test))
