@@ -34,3 +34,7 @@
                 (and (not (pred elem))
                      (test ((residue elem) s))))))))
     test))
+
+;; Program 8.6 there-exists
+(define (there-exists pred)
+  (compose not (none pred)))
