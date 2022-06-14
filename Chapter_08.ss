@@ -38,3 +38,7 @@
 ;; Program 8.6 there-exists
 (define (there-exists pred)
   (compose not (none pred)))
+
+;; Program 8.7 for-all
+(define (for-all pred)
+  (none (compose not pred)))
