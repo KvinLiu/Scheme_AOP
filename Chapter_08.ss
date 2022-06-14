@@ -42,3 +42,12 @@
 ;; Program 8.7 for-all
 (define (for-all pred)
   (none (compose not pred)))
+
+;; Program 8.8 set-equal
+(define (set-equal obj1)
+  (lambda (obj2)
+    (or (and ((neither set?) obj1 obj2)
+             (equal? obj1 obj2))
+        (and ((both set?) obj1 obj2)
+             ((subset obj1) obj2)
+             ((subset obj2) obj1)))))
