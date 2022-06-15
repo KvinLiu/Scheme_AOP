@@ -51,3 +51,7 @@
         (and ((both set?) obj1 obj2)
              ((subset obj1) obj2)
              ((subset obj2) obj1)))))
+
+;; Program 8.9 element
+(define element
+  (compose there-exists set-equal))
