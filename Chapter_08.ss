@@ -55,3 +55,8 @@
 ;; Program 8.9 element
 (define element
   (compose there-exists set-equal))
+
+;; Program 8.10 contains
+(define (contains set)
+  (lambda (obj)
+    ((element obj) set)))
