@@ -60,3 +60,8 @@
 (define (contains set)
   (lambda (obj)
     ((element obj) set)))
+
+;; Program 8.11 superset
+(define (superset s1)
+  (lambda (s2)
+    ((for-all (contains s1)) s2)))
