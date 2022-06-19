@@ -65,3 +65,8 @@
 (define (superset s1)
   (lambda (s2)
     ((for-all (contains s1)) s2)))
+
+;; Program 8.12 subset
+(define (subset s1)
+  (lambda (s2)
+    ((superset s2) s1)))
