@@ -70,3 +70,10 @@
 (define (subset s1)
   (lambda (s2)
     ((superset s2) s1)))
+
+;; Program 8.13 cardinal
+(define (cardinal s)
+  (if (empty-set? s)
+      0
+      (let ((elem (pick s)))
+        (add1 (cardinal ((residue elem) s))))))
