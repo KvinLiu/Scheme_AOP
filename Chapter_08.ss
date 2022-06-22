@@ -90,3 +90,16 @@
                     (adjoin elem (helper ((residue elem) s1)))
                     (helper ((residue elem) s1))))))))
     (helper s1)))
+
+;; Program 8.15 union
+(define (union s1 s2)
+  (letrec
+      ((helper
+        (lambda (s1)
+          (if (empty-set? s1)
+              s2
+              (let ((elem (pick s1)))
+                (if (not ((contains s2) elm))
+                    (adjoin elem (helper ((residue elem) s1)))
+                    (helper ((residue elem) s1))))))))
+    (helper s1)))
