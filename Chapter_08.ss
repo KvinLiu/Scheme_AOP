@@ -103,3 +103,16 @@
                     (adjoin elem (helper ((residue elem) s1)))
                     (helper ((residue elem) s1))))))))
     (helper s1)))
+
+;; Program 8.16 difference
+(define (difference s1 s2)
+  (letrec
+      ((helper
+        (lambda (s1)
+          (if (empty-set? s1)
+              the-empty-set
+              (let ((elem (pick s1)))
+                (if (not ((contains s2) elem))
+                    (adjoin elem (helper ((residue elem) s1)))
+                    (helper ((residue elem) s1))))))))
+    (helper s1)))
