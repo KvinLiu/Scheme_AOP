@@ -116,3 +116,16 @@
                     (adjoin elem (helper ((residue elem) s1)))
                     (helper ((residue elem) s1))))))))
     (helper s1)))
+
+;; Program 8.17 set-builder
+(define (set-builder pred base-set)
+  (letrec
+      ((helper
+        (lambda (s)
+          (if (empty-set? s)
+              base-set
+              (let ((elem (pick s)))
+                (if (pred elem)
+                    (adjoin elem (helper ((residue elem) s)))
+                    (helper ((residue elem) s))))))))
+    helper))
