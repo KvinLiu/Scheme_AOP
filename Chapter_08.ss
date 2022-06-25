@@ -129,3 +129,10 @@
                     (adjoin elem (helper ((residue elem) s)))
                     (helper ((residue elem) s))))))))
     helper))
+
+;; Program 8.19 family-union
+(define (family-union s)
+  (if (empty-set? s)
+      the-empty-set
+      (let ((elem (pick s)))
+        (union elem (family-union ((residue elem)))))))
