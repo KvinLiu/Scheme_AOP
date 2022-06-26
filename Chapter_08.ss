@@ -136,3 +136,17 @@
       the-empty-set
       (let ((elem (pick s)))
         (union elem (family-union ((residue elem)))))))
+
+;; Program 8.20 family-intersection
+(define (family-intersection s)
+  (if (empty-set? s)
+      the-empty-set
+      (letrec
+          ((fam-int
+            (lambda (s)
+              (let ((elem (pick s)))
+                (let ((rest ((residue elem) s)))
+                  (if (empty-set? rest)
+                      elem
+                      (intersection elem (fam-int rest))))))))
+        (fam-int s))))
