@@ -150,3 +150,11 @@
                       elem
                       (intersection elem (fam-int rest))))))))
         (fam-int s))))
+
+;; Program 8.21 set-map
+(define (set-map proc s)
+  (if (empty-set? s)
+      the-empty-set
+      (let ((elem (pick s)))
+        (adjoin (proc elem)
+                (set-map proc ((residue elem) s))))))
