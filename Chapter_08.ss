@@ -158,3 +158,7 @@
       (let ((elem (pick s)))
         (adjoin (proc elem)
                 (set-map proc ((residue elem) s))))))
+
+;; Program 8.22 list -> set
+(define (list->set ls)
+  (apply make-set ls))
