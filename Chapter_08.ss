@@ -169,3 +169,6 @@
       '()
       (let ((elem (pick s)))
         (cons elem (set->list ((residue elem) s))))))
+
+;; Program 8.24 The shared basic definitions for sets
+(define the-empty-set (cons set-tag '()))
