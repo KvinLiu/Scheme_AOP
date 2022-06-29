@@ -162,3 +162,10 @@
 ;; Program 8.22 list -> set
 (define (list->set ls)
   (apply make-set ls))
+
+;; Program 8.23 set -> list
+(define (set->list s)
+  (if (empty-set? s)
+      '()
+      (let ((elem (pick s)))
+        (cons elem (set->list ((residue elem) s))))))
